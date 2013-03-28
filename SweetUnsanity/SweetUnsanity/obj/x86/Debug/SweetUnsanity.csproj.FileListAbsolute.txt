@@ -1,0 +1,10 @@
+C:\Users\Lou\Documents\Visual Studio 2010\Projects\SweetUnsanity\SweetUnsanity\SweetUnsanity\bin\x86\Debug\SweetUnsanity.exe
+C:\Users\Lou\Documents\Visual Studio 2010\Projects\SweetUnsanity\SweetUnsanity\SweetUnsanity\bin\x86\Debug\SweetUnsanity.pdb
+C:\Users\Lou\Documents\Visual Studio 2010\Projects\SweetUnsanity\SweetUnsanity\SweetUnsanity\obj\x86\Debug\SweetUnsanity.csprojResolveAssemblyReference.cache
+C:\Users\Lou\Documents\Visual Studio 2010\Projects\SweetUnsanity\SweetUnsanity\SweetUnsanity\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Lou\Documents\Visual Studio 2010\Projects\SweetUnsanity\SweetUnsanity\SweetUnsanity\obj\x86\Debug\SweetUnsanity.exe
+C:\Users\Lou\Documents\Visual Studio 2010\Projects\SweetUnsanity\SweetUnsanity\SweetUnsanity\obj\x86\Debug\SweetUnsanity.pdb
+C:\Users\Lou\Documents\Visual Studio 2010\Projects\SweetUnsanity\SweetUnsanity\SweetUnsanity\bin\x86\Debug\Content\Images\playerBox.xnb
+C:\Users\Lou\Documents\Visual Studio 2010\Projects\SweetUnsanity\SweetUnsanity\SweetUnsanity\bin\x86\Debug\Content\Images\platformBox.xnb
+C:\Users\Lou\Documents\Visual Studio 2010\Projects\SweetUnsanity\SweetUnsanity\SweetUnsanity\bin\x86\Debug\Content\Images\SU_Player_All.xnb
+C:\Users\Lou\Documents\Visual Studio 2010\Projects\SweetUnsanity\SweetUnsanity\SweetUnsanity\bin\x86\Debug\Content\Images\spriteSheet.xnb
