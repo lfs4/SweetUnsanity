@@ -24,6 +24,8 @@ namespace SweetUnsanity
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            //window = GraphicsDevice.Viewport.Bounds;
+
         }
 
         /// <summary>
@@ -37,6 +39,7 @@ namespace SweetUnsanity
             // TODO: Add your initialization logic here
             spriteManager = new SpriteManager(this);
             Components.Add(spriteManager);
+            Console.WriteLine(Window.ClientBounds.Width);
             base.Initialize();
         }
 
@@ -85,7 +88,7 @@ namespace SweetUnsanity
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
