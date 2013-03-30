@@ -39,7 +39,6 @@ namespace SweetUnsanity
             // TODO: Add your initialization logic here
             spriteManager = new SpriteManager(this);
             Components.Add(spriteManager);
-            Console.WriteLine(Window.ClientBounds.Width);
             base.Initialize();
         }
 

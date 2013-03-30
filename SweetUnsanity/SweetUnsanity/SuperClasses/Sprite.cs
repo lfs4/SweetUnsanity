@@ -19,7 +19,7 @@ namespace SweetUnsanity.SuperClasses
         int width;
 
         
-        protected Point frameSize;
+        protected Point _frameSize;
         public  Point currentFrame;
         public  Point sheetSize;
 
@@ -30,17 +30,24 @@ namespace SweetUnsanity.SuperClasses
 
         const int defaultPixelOffset = 0;
 
+        const int defaultCollisionOffset = 0;
+
         protected int pixelOffset;
+
+        protected int collisionOffset;
 
         protected SpriteEffects _spriteEffects;
 
+        protected GlobalClass global;
+
+
         public Sprite(Texture2D image, Vector2 _position, int height, int width, Point frameSize, Point currentFrame, Point sheetSize) :
-            this(image, _position, height, width, frameSize, currentFrame, sheetSize,defaultMillisecondsPerFrame, defaultPixelOffset)
+            this(image, _position, height, width, frameSize, currentFrame, sheetSize,defaultMillisecondsPerFrame, defaultPixelOffset, defaultCollisionOffset)
         {
  
         }
 
-        public Sprite(Texture2D image, Vector2 _position, int height, int width, Point frameSize, Point currentFrame, Point sheetSize, int millisecondsPerFrame, int pixelOffset)
+        public Sprite(Texture2D image, Vector2 _position, int height, int width, Point frameSize, Point currentFrame, Point sheetSize, int millisecondsPerFrame, int pixelOffset, int collisionOffset)
            
         {
             this.image = image;
@@ -50,13 +57,30 @@ namespace SweetUnsanity.SuperClasses
             this.height = height;
             this.width = width;
 
-            this.frameSize = frameSize;
+            this._frameSize = frameSize;
             this.currentFrame = currentFrame;
             this.sheetSize = sheetSize;
             this.millisecondsPerFrame = millisecondsPerFrame;
-            this._spriteEffects = SpriteEffects.None;
+            this._spriteEffects = SpriteEffects.FlipHorizontally;
             this.pixelOffset = pixelOffset;
+            this.collisionOffset = collisionOffset;
+            this.global = new GlobalClass();
+
             
+        }
+
+        public Vector2 position {
+            get {
+                return this._position;
+            }
+            set {
+                this._position = value; 
+           }
+        }
+        public Point frameSize {
+            get {
+                return this._frameSize;
+            }
         }
 
         public virtual void Update(GameTime gameTime)
@@ -86,12 +110,18 @@ namespace SweetUnsanity.SuperClasses
         {
 
             spriteBatch.Draw(image,_position,
-                new Rectangle(currentFrame.X * frameSize.X, (currentFrame.Y * frameSize.Y) + pixelOffset, frameSize.X, frameSize.Y),
+                new Rectangle(currentFrame.X * _frameSize.X, (currentFrame.Y * _frameSize.Y) + pixelOffset, _frameSize.X, _frameSize.Y),
                 Color.White
                 ,0,Vector2.Zero,1f,_spriteEffects,0);
 
         }
 
+        public Rectangle collisionRect {
+            get {
+                return new Rectangle(_position.X + collisionOffset, _position.Y, _frameSize.X, _frameSize.Y);
+            }
+            
+        }
 
         
     }

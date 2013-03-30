@@ -1,4 +1,4 @@
-﻿/*using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,31 +8,13 @@ using SweetUnsanity.SuperClasses;
 
 namespace SweetUnsanity.Sprites
 {
-    
-    class Platform: Sprite
+
+    class Platform : Sprite
     {
-        Vector2  speed;
-
-        int Id;
-
-        public Platform(Texture2D textureImage, Vector2 position, Point frameSize, Point currentFrame, Point sheetSize,int Id)
-            : base(textureImage,position,frameSize,currentFrame,sheetSize,Id)
+        public Platform(Texture2D image, Vector2 _position, int height, int width, Point frameSize, Point currentFrame, Point sheetSize)
+            : base(image, _position, height, width, frameSize, currentFrame, sheetSize)
         { 
-        }
-
-        public override Vector2 direction
-        {
-            get { return speed; }
-        }
-
-        public override void Update(GameTime gameTime, Rectangle clientBounds)
-        {
-            _position += direction;
-
             
-
-            base.Update(gameTime, clientBounds);
         }
-
     }
-}*/
+}
