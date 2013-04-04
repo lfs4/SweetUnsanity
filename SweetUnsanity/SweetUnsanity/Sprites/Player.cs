@@ -20,7 +20,7 @@ namespace SweetUnsanity
 
         float jumpHeight = .75f;
 
-        float gravity = .02f;
+        public float gravity = .02f;
         float dy = 0;
 
        public float velocityY;
@@ -36,9 +36,15 @@ namespace SweetUnsanity
 
         bool sPressed = false;
 
+        public bool rightCollide = false;
+
+        
+
         float gravSwitch = 1;
 
         string temp;
+
+       
 
        
 
@@ -64,6 +70,11 @@ namespace SweetUnsanity
         {
             KeyboardState keystate = Keyboard.GetState();
 
+            //lastPosition = _position;
+
+            _position.Y += velocityY;
+
+            _position.X += velocityX;
 
             if (wallJumpTimer <= 0)
                 wallJumped = false;
@@ -75,13 +86,19 @@ namespace SweetUnsanity
 
             if (keystate.IsKeyDown(Keys.A) || keystate.IsKeyDown(Keys.Left))
             {
-                if (!wallJumped)
-                    velocityX -= moveSpeed * gameTime.ElapsedGameTime.Milliseconds;
+              
+                    if (!wallJumped)
+                        velocityX -= moveSpeed * gameTime.ElapsedGameTime.Milliseconds;
+
             }
-            if (keystate.IsKeyDown(Keys.D) || keystate.IsKeyDown(Keys.Right))
+            if (keystate.IsKeyDown(Keys.D) || keystate.IsKeyDown(Keys.Right) )
             {
-                if (!wallJumped)
-                    velocityX += moveSpeed * gameTime.ElapsedGameTime.Milliseconds;
+
+
+                    if (!wallJumped)
+                        velocityX = +moveSpeed * gameTime.ElapsedGameTime.Milliseconds;
+      
+
             }
             if (keystate.IsKeyDown(Keys.Space))
             {
@@ -112,11 +129,13 @@ namespace SweetUnsanity
 
            CheckBounds(gameTime);
 
+           // Console.WriteLine("Vx" + velocityX +  " " + "Vy" + velocityY);
 
-            //Console.WriteLine(velocityY);
 
-            _position.Y += velocityY;
-            _position.X += velocityX;
+
+
+           
+
 
 
             base.Update(gameTime);
@@ -174,7 +193,7 @@ namespace SweetUnsanity
             }
             if (_position.Y + velocityY > 480 - _frameSize.Y)
             {
-                _position.Y = 480 - _frameSize.Y;
+                _position.Y = 480 - frameSize.Y;
                 velocityY = 0;
 
                 if (gravSwitch == 1)
@@ -188,6 +207,7 @@ namespace SweetUnsanity
             if (!touchGround)
                 jumped = true;
         }
+
         public void switchGravity()
         {
             gravSwitch *= -1;
