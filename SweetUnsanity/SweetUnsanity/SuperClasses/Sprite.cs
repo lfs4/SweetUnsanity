@@ -13,10 +13,10 @@ namespace SweetUnsanity.SuperClasses
     {
         Texture2D image;
 
-        protected Vector2 _position;
+        public Vector2 _position;
 
-        int height;
-        int width;
+       public  int height;
+        public int width;
 
         
         protected Point _frameSize;
@@ -83,6 +83,16 @@ namespace SweetUnsanity.SuperClasses
             }
         }
 
+        public Rectangle collisionRect
+        {
+            get
+            {
+                // return new Rectangle((int)_position.X + collisionOffset, (int)_position.Y, _frameSize.X - collisionOffset, _frameSize.Y);
+                return new Rectangle((int)_position.X, (int)_position.Y, _frameSize.X, _frameSize.Y);
+            }
+
+        }
+
         public virtual void Update(GameTime gameTime)
         {
             Animate(gameTime);
@@ -109,19 +119,14 @@ namespace SweetUnsanity.SuperClasses
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
 
-            spriteBatch.Draw(image,_position,
+            spriteBatch.Draw(image,new Vector2(collisionRect.X, collisionRect.Y),
                 new Rectangle(currentFrame.X * _frameSize.X, (currentFrame.Y * _frameSize.Y) + pixelOffset, _frameSize.X, _frameSize.Y),
                 Color.White
                 ,0,Vector2.Zero,1f,_spriteEffects,0);
 
         }
 
-        public Rectangle collisionRect {
-            get {
-                return new Rectangle(_position.X + collisionOffset, _position.Y, _frameSize.X, _frameSize.Y);
-            }
-            
-        }
+
 
         
     }

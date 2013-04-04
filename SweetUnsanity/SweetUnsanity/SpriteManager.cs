@@ -48,9 +48,9 @@ namespace SweetUnsanity
         {
             spriteBatch = new SpriteBatch(Game.GraphicsDevice);
 
-            player = new Player(Game.Content.Load<Texture2D>(@"Images/playerBox"), Vector2.Zero,32,32,new Point(26, 61), new Point(0, 0), new Point(3, 0));
+            player = new Player(Game.Content.Load<Texture2D>(@"Images/spriteSheet"), Vector2.Zero,32,32,new Point(22, 40), new Point(0,1), new Point(3, 0), 100, 2,0);
             spriteList.Add(new Platform(Game.Content.Load<Texture2D>(@"Images/platformBox"), new Vector2(400,420), 64, 32, new Point(64, 32), new Point(0, 0), new Point(0, 0)));
-            spriteList.Add(new Platform(Game.Content.Load<Texture2D>(@"Images/platformBox"), new Vector2(410, 220), 64, 32, new Point(64, 32), new Point(0, 0), new Point(0, 0)));
+            spriteList.Add(new Platform(Game.Content.Load<Texture2D>(@"Images/platformBox"), new Vector2(425, 320), 64, 32, new Point(64, 32), new Point(0, 0), new Point(0, 0)));
             //spriteList.Add(new Platform(Game.Content.Load<Texture2D>(@"Images/platformBox"), new Vector2(400,420), 64, 32, new Point(64, 32), new Point(0, 0), new Point(0, 0)));
            // platform2 = new Platform(Game.Content.Load<Texture2D>(@"Images/platformBox"), new Vector2(1000, 0), 64, 32, new Point(64, 32), new Point(0, 0), new Point(0, 0));
             base.LoadContent();
@@ -63,11 +63,13 @@ namespace SweetUnsanity
 
                 Vector2 depth = FindIntersectionDepth(player.collisionRect, s.collisionRect);
 
+               
+
                 if (depth != Vector2.Zero)
                 {
                     if (Math.Abs(depth.X) > Math.Abs(depth.Y))
                     {
-                        player.velocityY = 0f;
+                        player.velocityY  = 0f;
                         player._position.Y -= depth.Y;
                         player.jumped = false;
                         CheckCollision();
@@ -96,8 +98,12 @@ namespace SweetUnsanity
                 int y1 = r1.Top - r2.Bottom;
                 int y2 = r1.Bottom - r2.Top;
 
+
                 depth.X = Math.Abs(x1) < Math.Abs(x2) ? x1 : x2;
                 depth.Y = Math.Abs(y1) < Math.Abs(y2) ? y1 : y2;
+
+                
+
 
                 Console.WriteLine(r1.Bottom + " " + r2.Bottom);
                //Console.WriteLine("X1 " + " " + x1 + " " + "X2 " + x2 + " " + "Y1 " + y1 + " "  + "y2 " + y2);
