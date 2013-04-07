@@ -15,17 +15,17 @@ namespace SweetUnsanity.SuperClasses
 
         public Vector2 _position;
 
-       public  int height;
+        public int height;
         public int width;
 
-        
+
         protected Point _frameSize;
-        public  Point currentFrame;
-        public  Point sheetSize;
+        public Point currentFrame;
+        public Point sheetSize;
 
         int millisecondsPerFrame;
         int timeSinceLastFrame = 0;
-      
+
         const int defaultMillisecondsPerFrame = 100;
 
         const int defaultPixelOffset = 0;
@@ -42,13 +42,12 @@ namespace SweetUnsanity.SuperClasses
 
 
         public Sprite(Texture2D image, Vector2 _position, int height, int width, Point frameSize, Point currentFrame, Point sheetSize) :
-            this(image, _position, height, width, frameSize, currentFrame, sheetSize,defaultMillisecondsPerFrame, defaultPixelOffset, defaultCollisionOffset)
+            this(image, _position, height, width, frameSize, currentFrame, sheetSize, defaultMillisecondsPerFrame, defaultPixelOffset, defaultCollisionOffset)
         {
- 
+
         }
 
         public Sprite(Texture2D image, Vector2 _position, int height, int width, Point frameSize, Point currentFrame, Point sheetSize, int millisecondsPerFrame, int pixelOffset, int collisionOffset)
-           
         {
             this.image = image;
 
@@ -66,19 +65,24 @@ namespace SweetUnsanity.SuperClasses
             this.collisionOffset = collisionOffset;
             this.global = new GlobalClass();
 
-            
+
         }
 
-        public Vector2 position {
-            get {
+        public Vector2 position
+        {
+            get
+            {
                 return this._position;
             }
-            set {
-                this._position = value; 
-           }
+            set
+            {
+                this._position = value;
+            }
         }
-        public Point frameSize {
-            get {
+        public Point frameSize
+        {
+            get
+            {
                 return this._frameSize;
             }
         }
@@ -119,16 +123,16 @@ namespace SweetUnsanity.SuperClasses
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
 
-            spriteBatch.Draw(image,new Vector2(collisionRect.X, collisionRect.Y),
+            spriteBatch.Draw(image, new Vector2(collisionRect.X, collisionRect.Y),
                 new Rectangle(currentFrame.X * _frameSize.X, (currentFrame.Y * _frameSize.Y) + pixelOffset, _frameSize.X, _frameSize.Y),
                 Color.White
-                ,0,Vector2.Zero,1f,_spriteEffects,0);
+                , 0, Vector2.Zero, 1f, _spriteEffects, 0);
 
         }
 
 
 
-        
+
     }
-    
+
 }

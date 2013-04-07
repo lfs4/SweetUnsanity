@@ -10,7 +10,7 @@ using SweetUnsanity.SuperClasses;
 
 namespace SweetUnsanity
 {
-    class Player: Sprite
+    class Player : Sprite
     {
 
         float moveSpeed = .4f;
@@ -23,10 +23,10 @@ namespace SweetUnsanity
         public float gravity = .02f;
         float dy = 0;
 
-       public float velocityY;
-       public float velocityX;
+        public float velocityY;
+        public float velocityX;
 
-       public bool jumped = false;
+        public bool jumped = false;
         bool wallJumped = false;
 
         float wallJumpDelay = 550f;
@@ -38,30 +38,33 @@ namespace SweetUnsanity
 
         public bool rightCollide = false;
 
-        
+        public bool dead = false;
 
-        float gravSwitch = 1;
+       public bool looped = false;
+
+
+        public float gravSwitch = 1;
 
         string temp;
 
-       
-
-       
 
 
 
 
-        
-        
+
+
+
+
+
         public Player(Texture2D image, Vector2 _position, int height, int width, Point frameSize, Point currentFrame, Point sheetSize)
             : base(image, _position, height, width, frameSize, currentFrame, sheetSize)
         {
         }
 
         public Player(Texture2D image, Vector2 _position, int height, int width, Point frameSize, Point currentFrame, Point sheetSize, int miliSecondsPerFrame, int pixelOffset, int collisionOffset)
-            : base(image, _position, height, width, frameSize, currentFrame, sheetSize,miliSecondsPerFrame,pixelOffset,collisionOffset)
-        {    
-            
+            : base(image, _position, height, width, frameSize, currentFrame, sheetSize, miliSecondsPerFrame, pixelOffset, collisionOffset)
+        {
+
         }
 
 
@@ -70,7 +73,15 @@ namespace SweetUnsanity
         {
             KeyboardState keystate = Keyboard.GetState();
 
-            //lastPosition = _position;
+            if (dead)
+            {
+                 velocityX = 0;
+                 velocityY = 0;
+                 gravSwitch = 1;
+                 _position = Vector2.Zero;
+                 looped = false;
+                 dead = false;
+            }
 
             _position.Y += velocityY;
 
@@ -86,18 +97,18 @@ namespace SweetUnsanity
 
             if (keystate.IsKeyDown(Keys.A) || keystate.IsKeyDown(Keys.Left))
             {
-              
-                    if (!wallJumped)
-                        velocityX -= moveSpeed * gameTime.ElapsedGameTime.Milliseconds;
+
+                if (!wallJumped)
+                    velocityX -= moveSpeed * gameTime.ElapsedGameTime.Milliseconds;
 
             }
-            if (keystate.IsKeyDown(Keys.D) || keystate.IsKeyDown(Keys.Right) )
+            if (keystate.IsKeyDown(Keys.D) || keystate.IsKeyDown(Keys.Right))
             {
 
 
-                    if (!wallJumped)
-                        velocityX = +moveSpeed * gameTime.ElapsedGameTime.Milliseconds;
-      
+                if (!wallJumped)
+                    velocityX = +moveSpeed * gameTime.ElapsedGameTime.Milliseconds;
+
 
             }
             if (keystate.IsKeyDown(Keys.Space))
@@ -124,23 +135,15 @@ namespace SweetUnsanity
             else if (gPressed)
                 gPressed = false;
 
-
             velocityY += (gravity * gameTime.ElapsedGameTime.Milliseconds) * gravSwitch;
 
-           CheckBounds(gameTime);
+            CheckBounds(gameTime);
 
-           // Console.WriteLine("Vx" + velocityX +  " " + "Vy" + velocityY);
-
-
-
-
-           
-
-
+            // Console.WriteLine("Vx" + velocityX +  " " + "Vy" + velocityY);
 
             base.Update(gameTime);
         }
-       private void CheckBounds(GameTime gameTime)
+        private void CheckBounds(GameTime gameTime)
         {
 
             //temp = (ballPos.Y + velocityY).ToString();
@@ -164,18 +167,23 @@ namespace SweetUnsanity
                     velocityX = (moveSpeed * 0.75f) * gameTime.ElapsedGameTime.Milliseconds;
                 }
             }
-            if (_position.Y + velocityY < 0)
+            if (_position.Y + velocityY < -_frameSize.Y)
             {
-                _position.Y = 0;
-                velocityY = 0;
 
-                if (gravSwitch == -1)
-                {
-                    jumped = false;
-                    wallJumped = false;
-                    touchGround = true;
 
-                }
+                    if (gravSwitch < 0 && !looped)
+                    {
+                        _position.Y = 480 + _frameSize.Y;
+                        looped = true;
+                    }
+                    else if(gravSwitch < 0 && looped)
+                    {
+
+                        dead = true;
+
+                    }
+                    
+
             }
             if (_position.X + velocityX > global.Window.ClientBounds.Width - _frameSize.X)
             {
@@ -191,10 +199,24 @@ namespace SweetUnsanity
                     velocityX = -1 * (moveSpeed * 0.75f) * gameTime.ElapsedGameTime.Milliseconds;
                 }
             }
-            if (_position.Y + velocityY > 480 - _frameSize.Y)
+            if (_position.Y + velocityY > 480 + _frameSize.Y)
             {
-                _position.Y = 480 - frameSize.Y;
-                velocityY = 0;
+                if (gravSwitch > 0)
+                {
+                    if (!looped)
+                    {
+                        _position.Y = -_frameSize.Y;
+                        looped = true;
+                    }
+                    else if (looped)
+                    {
+                        dead = true;
+                    }
+                }
+                else if (gravSwitch < 0)
+                {
+                    _position.Y = -_frameSize.Y + velocityY;
+                }
 
                 if (gravSwitch == 1)
                 {
